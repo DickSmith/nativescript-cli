@@ -161,11 +161,22 @@ interface ILiveSyncInfo extends IProjectDir, IEnvOptions, IBundle, IRelease, IOp
 	timeout: string;
 }
 
+
 interface IHasUseHotModuleReloadOption {
 	/**
 	 * Defines if the hot module reload should be used.
 	 */
 	useHotModuleReload?: boolean;
+}
+
+interface ILiveSyncEventData {
+	deviceIdentifier: string,
+	applicationIdentifier?: string,
+	projectDir: string,
+	syncedFiles?: Object
+	error? : Error,
+	notification?: string,
+	isFullSync?: boolean
 }
 
 interface ILatestAppPackageInstalledSettings extends IDictionary<IDictionary<boolean>> { /* empty */ }
