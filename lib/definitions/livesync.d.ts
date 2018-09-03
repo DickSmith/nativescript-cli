@@ -395,6 +395,11 @@ interface IAndroidNativeScriptDeviceLiveSyncService extends INativeScriptDeviceL
 	finalizeSync(liveSyncInfo: ILiveSyncResultInfo, projectData: IProjectData): Promise<IAndroidLivesyncSyncOperationResult>;
 }
 
+interface ILiveSyncSocket extends INetSocket {
+	uid: string,
+	writeAsync(data: Buffer): Promise<Boolean>
+}
+
 interface IAndroidLivesyncTool {
 	/**
 	 * The protocol version the current app(adnroid runtime) is using.
@@ -430,13 +435,13 @@ interface IAndroidLivesyncTool {
 	 * @param filePath - The full path to the file.
 	 * @returns {Promise<boolean>}
 	 */
-	removeFile(filePath: string): Promise<boolean>;
+	removeFile(filePath: string): Promise<void>;
 	/**
 	 * Removes files
 	 * @param filePaths - Array of files that will be removed.
 	 * @returns {Promise<boolean[]>}
 	 */
-	removeFiles(filePaths: string[]): Promise<boolean[]>;
+	removeFiles(filePaths: string[]): Promise<void[]>;
 	/**
 	 * Sends doSyncOperation that will be handled by the runtime.
 	 * @param doRefresh - Indicates if the application should be restarted. Defaults to true.
