@@ -117,7 +117,11 @@ export abstract class PlatformLiveSyncServiceBase {
 		let transferredFiles: Mobile.ILocalToDevicePathData[] = [];
 		const deviceLiveSyncService = this.getDeviceLiveSyncService(deviceAppData.device, projectData);
 
+		localToDevicePaths = localToDevicePaths.filter(f => path.basename(f.getLocalPath()) !== "bundle.js");
+		console.log("will transfer ", localToDevicePaths.map( l => l.getLocalPath()));
+		console.time("%%%%%%%%%%%% %%%%%%%%% transferFiles");
 		transferredFiles = await deviceLiveSyncService.transferFiles(deviceAppData, localToDevicePaths, projectFilesPath, isFullSync);
+		console.timeEnd("%%%%%%%%%%%% %%%%%%%%% transferFiles");
 
 		this.logFilesSyncInformation(transferredFiles, "Successfully transferred %s.", this.$logger.info);
 
